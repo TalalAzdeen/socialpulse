@@ -1,0 +1,14 @@
+{
+  "asOf": "2026-10-30",
+  "statusCounts": {
+    "implemented": 9,
+    "planned": 6,
+    "blocked": 3
+  },
+  "notes": [
+    "Implemented refers to code presence, not complete production validation",
+    "GitHub Contents API returned 403 Resource not accessible by integration on 2026-10-30",
+    "Owner-private Sites deployment succeeded; see docs/DELIVERY.md for receipt. Public access was not requested",
+    "Live verification is recorded separately; mock tests do not prove live API availability"
+  ]
+}

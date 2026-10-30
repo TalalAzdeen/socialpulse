@@ -1,0 +1,236 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "sp": "https://example.org/socialpulse/ontology#",
+    "Task": "sp:Task",
+    "status": "sp:status",
+    "dependsOn": {
+      "@id": "sp:dependsOn",
+      "@type": "@id"
+    },
+    "acceptanceCriteria": "sp:acceptanceCriteria",
+    "resource": "sp:resource",
+    "taskId": "sp:taskId"
+  },
+  "@graph": [
+    {
+      "@id": "sp:T01",
+      "@type": "Task",
+      "taskId": "T01",
+      "name": "تثبيت وتشغيل التطبيق المحلي",
+      "status": "implemented",
+      "dependsOn": [],
+      "resource": "server.py and index.html",
+      "acceptanceCriteria": "HTTP 200 from GET / and JSON 200 from GET /api/status"
+    },
+    {
+      "@id": "sp:T02",
+      "@type": "Task",
+      "taskId": "T02",
+      "name": "البحث عن منشورات Bluesky العامة",
+      "status": "implemented",
+      "dependsOn": [
+        "sp:T01"
+      ],
+      "resource": "Bluesky public XRPC",
+      "acceptanceCriteria": "Return genuine search results or explicit upstream failure; no mock fallback"
+    },
+    {
+      "@id": "sp:T03",
+      "@type": "Task",
+      "taskId": "T03",
+      "name": "عرض بيانات الحسابات والمنشورات",
+      "status": "implemented",
+      "dependsOn": [
+        "sp:T02"
+      ],
+      "resource": "Post metadata",
+      "acceptanceCriteria": "Show author, original link, text, engagement and available media"
+    },
+    {
+      "@id": "sp:T04",
+      "@type": "Task",
+      "taskId": "T04",
+      "name": "جلب ردود المنشورات",
+      "status": "implemented",
+      "dependsOn": [
+        "sp:T02"
+      ],
+      "resource": "Bluesky getPostThread",
+      "acceptanceCriteria": "Display accessible public replies; do not imply comprehensive capture"
+    },
+    {
+      "@id": "sp:T05",
+      "@type": "Task",
+      "taskId": "T05",
+      "name": "تحليل مشاعر أولي",
+      "status": "implemented",
+      "dependsOn": [
+        "sp:T02"
+      ],
+      "resource": "Arabic/English lexicon",
+      "acceptanceCriteria": "Label positive/neutral/negative as approximate only"
+    },
+    {
+      "@id": "sp:T06",
+      "@type": "Task",
+      "taskId": "T06",
+      "name": "تصدير نتائج CSV وJSON",
+      "status": "implemented",
+      "dependsOn": [
+        "sp:T02"
+      ],
+      "resource": "CSV formula neutralization and JSON provenance",
+      "acceptanceCriteria": "Download UTF-8 CSV and JSON for filtered displayed sample"
+    },
+    {
+      "@id": "sp:T07",
+      "@type": "Task",
+      "taskId": "T07",
+      "name": "اختبار بحث Bluesky على الإنترنت",
+      "status": "blocked",
+      "dependsOn": [
+        "sp:T02"
+      ],
+      "resource": "Reachable external API",
+      "acceptanceCriteria": "Successful live test of search and thread endpoints"
+    },
+    {
+      "@id": "sp:T08",
+      "@type": "Task",
+      "taskId": "T08",
+      "name": "إضافة YouTube Data API",
+      "status": "planned",
+      "dependsOn": [
+        "sp:T01"
+      ],
+      "resource": "YouTube API key + quotas",
+      "acceptanceCriteria": "Search videos and retrieve public comment threads per API limits"
+    },
+    {
+      "@id": "sp:T09",
+      "@type": "Task",
+      "taskId": "T09",
+      "name": "تقييم TikTok Instagram X APIs",
+      "status": "planned",
+      "dependsOn": [
+        "sp:T01"
+      ],
+      "resource": "Approved access and platform policies",
+      "acceptanceCriteria": "Document legal access, supported scopes, pricing and coverage"
+    },
+    {
+      "@id": "sp:T10",
+      "@type": "Task",
+      "taskId": "T10",
+      "name": "توحيد مصادر البيانات",
+      "status": "planned",
+      "dependsOn": [
+        "sp:T08",
+        "sp:T09"
+      ],
+      "resource": "Normalized Post/Comment/Author/Media model",
+      "acceptanceCriteria": "Normalized records with source, timestamps and provenance"
+    },
+    {
+      "@id": "sp:T11",
+      "@type": "Task",
+      "taskId": "T11",
+      "name": "تحسين تحليل العربية واللهجات",
+      "status": "planned",
+      "dependsOn": [
+        "sp:T10"
+      ],
+      "resource": "Validation dataset, model budget",
+      "acceptanceCriteria": "Document measured precision/recall and confidence/uncertainty"
+    },
+    {
+      "@id": "sp:T12",
+      "@type": "Task",
+      "taskId": "T12",
+      "name": "تجميع وتحليل الانطباع عبر الزمن",
+      "status": "implemented",
+      "dependsOn": [
+        "sp:T02",
+        "sp:T05"
+      ],
+      "resource": "Time-series aggregation",
+      "acceptanceCriteria": "Charts show source, sample size, collection period and limitations"
+    },
+    {
+      "@id": "sp:T13",
+      "@type": "Task",
+      "taskId": "T13",
+      "name": "حفظ البيانات والجدولة",
+      "status": "planned",
+      "dependsOn": [
+        "sp:T10"
+      ],
+      "resource": "Database, legal retention, scheduler",
+      "acceptanceCriteria": "Configurable retention, deduplication, background jobs and error logs"
+    },
+    {
+      "@id": "sp:T14",
+      "@type": "Task",
+      "taskId": "T14",
+      "name": "ضوابط أمان أساسية للنشر",
+      "status": "implemented",
+      "dependsOn": [
+        "sp:T01"
+      ],
+      "resource": "HTTPS, allowlists, quotas, CORS policy",
+      "acceptanceCriteria": "Rate limits, safe query validation, dependency/security review"
+    },
+    {
+      "@id": "sp:T15",
+      "@type": "Task",
+      "taskId": "T15",
+      "name": "رفع الكود إلى GitHub",
+      "status": "blocked",
+      "dependsOn": [
+        "sp:T01"
+      ],
+      "resource": "Repository Contents: write permission",
+      "acceptanceCriteria": "Files readable in TalalAzdeen/socialpulse on main"
+    },
+    {
+      "@id": "sp:T16",
+      "@type": "Task",
+      "taskId": "T16",
+      "name": "نشر المنصة على استضافة عامة",
+      "status": "blocked",
+      "dependsOn": [
+        "sp:T14",
+        "sp:T15"
+      ],
+      "resource": "External hosting authorization",
+      "acceptanceCriteria": "HTTPS public URL, /api/status works, real search test"
+    },
+    {
+      "@id": "sp:T17",
+      "@type": "Task",
+      "taskId": "T17",
+      "name": "اختبارات تلقائية وCI (المراقبة المستمرة غير مهيأة)",
+      "status": "implemented",
+      "dependsOn": [
+        "sp:T01",
+        "sp:T14"
+      ],
+      "resource": "Test harness and CI",
+      "acceptanceCriteria": "API health, regression, mock upstream, deployment monitoring"
+    },
+    {
+      "@id": "sp:T18",
+      "@type": "Task",
+      "taskId": "T18",
+      "name": "توثيق الخصوصية والامتثال",
+      "status": "planned",
+      "dependsOn": [
+        "sp:T09",
+        "sp:T13"
+      ],
+      "resource": "Platform terms and applicable privacy law",
+      "acceptanceCriteria": "Data inventory, rights handling, consent/access policy and retention"
+    }
+  ]
+}

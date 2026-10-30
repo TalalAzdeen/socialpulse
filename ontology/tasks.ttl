@@ -1,0 +1,145 @@
+@prefix sp: <https://example.org/socialpulse/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+sp:T01 a sp:Task ;
+    sp:taskId "T01" ;
+    sp:name "تثبيت وتشغيل التطبيق المحلي" ;
+    sp:status "implemented" ;
+    sp:resource "server.py and index.html" ;
+    sp:acceptanceCriteria "HTTP 200 from GET / and JSON 200 from GET /api/status" .
+
+sp:T02 a sp:Task ;
+    sp:taskId "T02" ;
+    sp:name "البحث عن منشورات Bluesky العامة" ;
+    sp:status "implemented" ;
+    sp:resource "Bluesky public XRPC" ;
+    sp:acceptanceCriteria "Return genuine search results or explicit upstream failure; no mock fallback" ;
+    sp:dependsOn sp:T01 .
+
+sp:T03 a sp:Task ;
+    sp:taskId "T03" ;
+    sp:name "عرض بيانات الحسابات والمنشورات" ;
+    sp:status "implemented" ;
+    sp:resource "Post metadata" ;
+    sp:acceptanceCriteria "Show author, original link, text, engagement and available media" ;
+    sp:dependsOn sp:T02 .
+
+sp:T04 a sp:Task ;
+    sp:taskId "T04" ;
+    sp:name "جلب ردود المنشورات" ;
+    sp:status "implemented" ;
+    sp:resource "Bluesky getPostThread" ;
+    sp:acceptanceCriteria "Display accessible public replies; do not imply comprehensive capture" ;
+    sp:dependsOn sp:T02 .
+
+sp:T05 a sp:Task ;
+    sp:taskId "T05" ;
+    sp:name "تحليل مشاعر أولي" ;
+    sp:status "implemented" ;
+    sp:resource "Arabic/English lexicon" ;
+    sp:acceptanceCriteria "Label positive/neutral/negative as approximate only" ;
+    sp:dependsOn sp:T02 .
+
+sp:T06 a sp:Task ;
+    sp:taskId "T06" ;
+    sp:name "تصدير نتائج CSV وJSON" ;
+    sp:status "implemented" ;
+    sp:resource "CSV formula neutralization and JSON provenance" ;
+    sp:acceptanceCriteria "Download UTF-8 CSV and JSON for filtered displayed sample" ;
+    sp:dependsOn sp:T02 .
+
+sp:T07 a sp:Task ;
+    sp:taskId "T07" ;
+    sp:name "اختبار بحث Bluesky على الإنترنت" ;
+    sp:status "blocked" ;
+    sp:resource "Reachable external API" ;
+    sp:acceptanceCriteria "Successful live test of search and thread endpoints" ;
+    sp:dependsOn sp:T02 .
+
+sp:T08 a sp:Task ;
+    sp:taskId "T08" ;
+    sp:name "إضافة YouTube Data API" ;
+    sp:status "planned" ;
+    sp:resource "YouTube API key + quotas" ;
+    sp:acceptanceCriteria "Search videos and retrieve public comment threads per API limits" ;
+    sp:dependsOn sp:T01 .
+
+sp:T09 a sp:Task ;
+    sp:taskId "T09" ;
+    sp:name "تقييم TikTok Instagram X APIs" ;
+    sp:status "planned" ;
+    sp:resource "Approved access and platform policies" ;
+    sp:acceptanceCriteria "Document legal access, supported scopes, pricing and coverage" ;
+    sp:dependsOn sp:T01 .
+
+sp:T10 a sp:Task ;
+    sp:taskId "T10" ;
+    sp:name "توحيد مصادر البيانات" ;
+    sp:status "planned" ;
+    sp:resource "Normalized Post/Comment/Author/Media model" ;
+    sp:acceptanceCriteria "Normalized records with source, timestamps and provenance" ;
+    sp:dependsOn sp:T08, sp:T09 .
+
+sp:T11 a sp:Task ;
+    sp:taskId "T11" ;
+    sp:name "تحسين تحليل العربية واللهجات" ;
+    sp:status "planned" ;
+    sp:resource "Validation dataset, model budget" ;
+    sp:acceptanceCriteria "Document measured precision/recall and confidence/uncertainty" ;
+    sp:dependsOn sp:T10 .
+
+sp:T12 a sp:Task ;
+    sp:taskId "T12" ;
+    sp:name "تجميع وتحليل الانطباع عبر الزمن" ;
+    sp:status "implemented" ;
+    sp:resource "Time-series aggregation" ;
+    sp:acceptanceCriteria "Charts show source, sample size, collection period and limitations" ;
+    sp:dependsOn sp:T02, sp:T05 .
+
+sp:T13 a sp:Task ;
+    sp:taskId "T13" ;
+    sp:name "حفظ البيانات والجدولة" ;
+    sp:status "planned" ;
+    sp:resource "Database, legal retention, scheduler" ;
+    sp:acceptanceCriteria "Configurable retention, deduplication, background jobs and error logs" ;
+    sp:dependsOn sp:T10 .
+
+sp:T14 a sp:Task ;
+    sp:taskId "T14" ;
+    sp:name "ضوابط أمان أساسية للنشر" ;
+    sp:status "implemented" ;
+    sp:resource "HTTPS, allowlists, quotas, CORS policy" ;
+    sp:acceptanceCriteria "Rate limits, safe query validation, dependency/security review" ;
+    sp:dependsOn sp:T01 .
+
+sp:T15 a sp:Task ;
+    sp:taskId "T15" ;
+    sp:name "رفع الكود إلى GitHub" ;
+    sp:status "blocked" ;
+    sp:resource "Repository Contents: write permission" ;
+    sp:acceptanceCriteria "Files readable in TalalAzdeen/socialpulse on main" ;
+    sp:dependsOn sp:T01 .
+
+sp:T16 a sp:Task ;
+    sp:taskId "T16" ;
+    sp:name "نشر المنصة على استضافة عامة" ;
+    sp:status "blocked" ;
+    sp:resource "External hosting authorization" ;
+    sp:acceptanceCriteria "HTTPS public URL, /api/status works, real search test" ;
+    sp:dependsOn sp:T14, sp:T15 .
+
+sp:T17 a sp:Task ;
+    sp:taskId "T17" ;
+    sp:name "اختبارات تلقائية وCI (المراقبة المستمرة غير مهيأة)" ;
+    sp:status "implemented" ;
+    sp:resource "Test harness and CI" ;
+    sp:acceptanceCriteria "API health, regression, mock upstream, deployment monitoring" ;
+    sp:dependsOn sp:T01, sp:T14 .
+
+sp:T18 a sp:Task ;
+    sp:taskId "T18" ;
+    sp:name "توثيق الخصوصية والامتثال" ;
+    sp:status "planned" ;
+    sp:resource "Platform terms and applicable privacy law" ;
+    sp:acceptanceCriteria "Data inventory, rights handling, consent/access policy and retention" ;
+    sp:dependsOn sp:T09, sp:T13 .
