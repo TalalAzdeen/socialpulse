@@ -1,0 +1,16 @@
+import {readFile,mkdir,rm,writeFile,copyFile} from 'node:fs/promises';
+const root=new URL('../',import.meta.url);
+const read=p=>readFile(new URL(p,root),'utf8');
+const files={'__HTML__':'index.html','__APP__':'app.js','__CSS__':'styles.css','__CORE__':'src/core.js'};
+const inputs=Object.fromEntries(await Promise.all(Object.values(files).map(async p=>[p,await read(p)])));
+let source=await read('worker/index.js');
+source=source.replace("import {searchParams,validPostURI} from '../src/core.js';",()=>inputs['src/core.js'].replace(/\bexport /g,''));
+for(const [token,path] of Object.entries(files))source=source.replace("'"+token+"'",()=>JSON.stringify(inputs[path]));
+const manifest=JSON.parse(await read('.openai/hosting.json'));
+if(!manifest.project_id)throw Error('Missing Sites project ID');
+await rm(new URL('dist/',root),{recursive:true,force:true});
+await mkdir(new URL('dist/server/',root),{recursive:true});
+await mkdir(new URL('dist/.openai/',root),{recursive:true});
+await writeFile(new URL('dist/server/index.js',root),source);
+await copyFile(new URL('.openai/hosting.json',root),new URL('dist/.openai/hosting.json',root));
+console.log('Built deterministic Worker with embedded HTML, CSS and modules.');
