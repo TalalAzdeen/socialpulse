@@ -1,0 +1,12 @@
+dist/
+site.tar.gz
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+.venv/
+*.log
+.DS_Store
+.superpowers/
+*.zip

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#4338ca"><meta name="description" content="نبض: مساحة عربية للبحث في منشورات Bluesky العامة، وفهم العينة وتحليل الانطباعات وتصدير النتائج."><title>نبض | مساحة الرصد الاجتماعي</title><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.js"></script></head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<aside class="sidebar">
+  <a href="/" class="brand"><span class="logo">ن</span><span>نبض<small>SOCIALPULSE</small></span></a>
+  <span class="nav-label">مساحة العمل</span>
+  <a class="nav active" href="#main"><span>◫</span> لوحة الرصد <span class="nav-dot"></span></a>
+  <button class="nav" id="savedNav"><span>◇</span> عمليات البحث المحفوظة <b id="savedCount">0</b></button>
+  <button class="nav" id="aboutBtn"><span>ⓘ</span> عن البيانات والمنهجية</button>
+  <div class="sidebar-divider"></div>
+  <div class="source-title">مصادر البيانات <span>١ متاح</span></div>
+  <div class="source-row"><span class="butterfly">🦋</span><span>Bluesky<small>منشورات وردود عامة</small></span><i class="dot"></i></div>
+  <p class="sidebar-note">X وYouTube وInstagram غير متصلة في هذا الإصدار.</p>
+  <div class="sidebar-bottom"><div class="mini-wave">▁ ▃ ▅ ▂ ▇ ▄ ▁ ▅ ▃ ▆</div><strong>من حديث الناس، إلى رؤية أوضح.</strong><p>المؤشرات تصف العينة التي تجمعها، وليست استطلاعًا للرأي العام.</p><span>نبض · الإصدار ٢.٠</span></div>
+</aside>
+<div class="workspace">
+  <header class="topbar"><div class="breadcrumb">مساحة العمل <span>/</span> <strong>لوحة الرصد</strong></div><div class="top-tools"><button class="mobile-saved" id="mobileSavedNav" aria-label="عمليات البحث المحفوظة">◇</button><span class="date" id="today"></span><span class="workspace-tag"><i class="dot"></i> محتوى عام فقط</span><span class="user-avatar" aria-hidden="true">ن</span></div></header>
+  <main id="main">
+    <div class="page-heading"><div><div class="eyebrow">SOCIAL LISTENING, SIMPLIFIED</div><h1>كل حديث يبدأ بنبض<span>.</span></h1><p>ابحث، استكشف النقاش، واقرأ الانطباع من مكان واحد.</p></div><button class="button secondary" id="saveSearch" disabled><span>＋</span> حفظ البحث</button></div>
+    <section class="search-panel" aria-labelledby="search-title">
+      <div class="search-heading"><h2 id="search-title"><span class="search-symbol">⌕</span> ما الذي تريد رصده اليوم؟</h2><span class="live-badge"><i class="dot"></i> المصدر: Bluesky</span></div>
+      <form id="searchForm">
+        <div class="search-line"><label class="sr-only" for="query">عبارة البحث</label><input id="query" maxlength="180" required autocomplete="off" placeholder="اسم، علامة تجارية، أو كلمة مفتاحية…"><button class="button primary" id="searchBtn" type="submit">ابدأ الرصد <span>←</span></button></div>
+        <div class="filter-line"><label>الفترة<select id="period"><option value="all">كل الأوقات</option><option value="1">اليوم (UTC)</option><option value="7">آخر ٧ أيام</option><option value="30">آخر ٣٠ يومًا</option><option value="custom">فترة مخصصة</option></select></label><label>اللغة<select id="language"><option value="">جميع اللغات</option><option value="ar">العربية</option><option value="en">الإنجليزية</option></select></label><label>ترتيب النتائج<select id="sort"><option value="latest">الأحدث أولًا</option><option value="top">الأكثر صلة</option></select></label><div class="try-queries"><span>جرّب:</span><button type="button" data-query="السعودية">السعودية</button><button type="button" data-query="coffee">coffee</button><button type="button" data-query="التقنية">التقنية</button></div></div>
+        <div class="custom-dates" id="customDates" hidden><label>من <input type="date" id="since"></label><label>إلى <input type="date" id="until"></label><small>التواريخ حسب UTC؛ يشمل البحث يوم النهاية.</small></div>
+      </form>
+    </section>
+    <div class="sample-notice"><span class="notice-icon">ⓘ</span><p><strong>قراءة أولية، وليست حكمًا نهائيًا.</strong> تحليل الانطباع قاموسي وتقريبي، وقد لا يفهم السخرية واللهجات. كل الأرقام تخص النتائج المسترجعة فقط.</p><button id="methodBtn">كيف نحلّل؟ ←</button></div>
+    <section class="metrics" aria-label="مؤشرات العينة">
+      <article class="metric"><div class="metric-top"><span>المنشورات في العينة</span><i class="metric-icon purple">▤</i></div><strong id="total">—</strong><small id="sampleLabel">ابدأ بحثًا لجمع البيانات</small></article>
+      <article class="metric"><div class="metric-top"><span>الحسابات الفريدة</span><i class="metric-icon blue">♧</i></div><strong id="users">—</strong><small>بحسب معرّف الحساب العام</small></article>
+      <article class="metric"><div class="metric-top"><span>إجمالي التفاعل</span><i class="metric-icon orange">↗</i></div><strong id="engagement">—</strong><small>إعجابات + ردود + إعادة نشر</small></article>
+      <article class="metric"><div class="metric-top"><span>الانطباع الإيجابي</span><i class="metric-icon green">☺</i></div><strong id="positive">—</strong><small>من نصوص العينة · تقدير قاموسي</small></article>
+    </section>
+    <section class="insights" aria-label="تحليل النتائج">
+      <article class="panel sentiment-panel"><div class="panel-title"><h2>كيف يبدو الانطباع؟</h2><span class="subtle-tag">تقريبي</span></div><div class="sentiment-content"><div class="donut" id="donut" role="img" aria-label="لا توجد بيانات بعد"><div><strong id="donutTotal">—</strong><small>منشور</small></div></div><div class="sentiment-legend" id="legend"><div><span><i class="dot positive"></i> إيجابي</span><strong>—</strong></div><div><span><i class="dot neutral"></i> محايد / غير محسوم</span><strong>—</strong></div><div><span><i class="dot negative"></i> سلبي</span><strong>—</strong></div></div></div><p class="panel-note">محايد يشمل النصوص التي لم نجد فيها إشارة واضحة.</p></article>
+      <article class="panel timeline-panel"><div class="panel-title"><h2>إيقاع النقاش</h2><span class="subtle-tag">توقيت UTC</span></div><div id="timeline" class="chart-empty"><span class="tiny-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><p>سيظهر توزيع المنشورات بحسب اليوم بعد البحث.</p></div></article>
+      <article class="panel speakers-panel"><div class="panel-title"><h2>أبرز المتحدثين</h2><span class="subtle-tag">في العينة</span></div><div id="speakers" class="speakers-empty"><span>♧</span><p>تعرف على الحسابات الأكثر حضورًا<br>في النتائج المسترجعة.</p></div></article>
+    </section>
+    <section class="panel results-panel" aria-labelledby="resultsTitle">
+      <div class="results-header"><div><h2 id="resultsTitle">مساحة النقاش <span id="resultBadge" class="count-badge">٠</span></h2><p id="resultContext">المنشورات العامة، من المصدر إلى أمامك.</p></div><div class="exports"><button class="button secondary compact" id="exportCSV" disabled>↓ CSV</button><button class="button secondary compact" id="exportJSON" disabled>↓ JSON</button></div></div>
+      <div class="result-filters"><div class="tabs" role="group" aria-label="تصفية الانطباع"><button class="selected" data-sentiment="all" aria-pressed="true">الكل</button><button data-sentiment="positive" aria-pressed="false"><i class="dot positive"></i> إيجابي</button><button data-sentiment="neutral" aria-pressed="false">محايد</button><button data-sentiment="negative" aria-pressed="false"><i class="dot negative"></i> سلبي</button></div><label class="media-only"><input type="checkbox" id="mediaOnly"> يتضمن وسائط</label></div>
+      <div id="status" role="status" aria-live="polite" class="empty-state"><div class="empty-art"><span>⌕</span><i class="empty-dot one"></i><i class="empty-dot two"></i><i class="empty-dot three"></i></div><h3>هناك حديث يستحق أن تكتشفه.</h3><p>اكتب اسمًا أو موضوعًا في شريط البحث،<br>وسنجمع لك المنشورات العامة المتاحة من Bluesky.</p><button class="text-button" data-query="coffee">استكشف الحديث عن coffee ←</button></div>
+      <div id="feed" class="feed" aria-busy="false"></div><div class="more-wrap"><button class="button secondary" id="loadMore" hidden>تحميل المزيد من المصدر ↓</button></div>
+    </section>
+    <footer><span><strong>نبض.</strong> مساحة لفهم الحديث العام.</span><span>بيانات عامة من <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">Bluesky ↗</a> <span class="footer-sep">·</span> <button class="text-button" id="privacyBtn">الخصوصية والحدود</button></span></footer>
+  </main>
+</div>
+<dialog id="infoDialog"><div class="dialog-header"><h2 id="dialogTitle"></h2><button class="close-button" id="closeDialog" aria-label="إغلاق">×</button></div><div id="dialogContent"></div></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+</body></html>
