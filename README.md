@@ -56,7 +56,7 @@ node scripts/validate-artifact.mjs
 
 رابط الموقع المخصص لهذا المشروع: https://socialpulse-nabd-2026.azadeentalal77435569.chatgpt.site
 
-مستودع GitHub المقصود: https://github.com/TalalAzdeen/socialpulse . أعاد تطبيق GitHub المتصل `403 Resource not accessible by integration` عند محاولة إنشاء الملف؛ يلزم منح التكامل `Contents: Read and write` للمستودع. **وجود المستودع لا يثبت رفع هذا الكود إليه.**
+مستودع المصدر: https://github.com/TalalAzdeen/socialpulse . تم نقل المشروع عبر واجهة GitHub بحساب مالك المستودع بعد تعذر الكتابة من التكامل. لا يتطلب استخدام المشروع منح صلاحيات إضافية للتكامل.
 
 ## بنية الملفات
 
